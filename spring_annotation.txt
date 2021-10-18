@@ -1,0 +1,58 @@
+ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
+applicationContext.getBean("person");
+
+@ComponentScan: 扫包
+只要标注了@Repository, @Component 的都会被扫到
+
+public class MainConfig {
+  @Bean("person01")
+  public Person person() {
+    return new Person("person", 20);
+  }
+}
+
+applicationContext.getBeanDefinitionNames()
+
+
+// 指定多种扫描规则
+@ComponentScans(
+    value = {
+        @ComponentScan(
+            value = {"com.qjl"},
+            excludeFilters = @ComponentScan.Filter(
+                type = FilterType.ANNOTATION,
+                value = {Controller.class, Service.class}
+            )
+        ),
+        @ComponentScan(
+            value = {"com.qjl"},
+            includeFilters = @ComponentScan.Filter(
+                type = FilterType.ANNOTATION,
+                value = {Controller.class, Service.class}
+            ),
+            // 配合includeFilters生效
+            useDefaultFilters = false
+        )
+    }
+)
+
+FilterType.ANNOTATION: 注解
+FilterType.ASSIGNABLE_TYPE:
+FilterType.ASPECTJ: aspectJ
+FilterType.REGEX: 正则
+FilterType.CUSTOM: 自定义filter
+
+
+
+Determine whether this filter matches for the class described by the given metadata.
+@param metadataReader the metadata reader for the target class
+当前在扫描的类的信息
+@param metadataReaderFactory a factory for obtaining metadata readers for other classes (such as superclasses and interfaces)
+获取的其他类的信息
+@return whether this filter matches
+@throws IOException in case of I/O failure when reading metadata
+
+@FunctionalInterface
+public interface TypeFilter {
+	boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException;
+}

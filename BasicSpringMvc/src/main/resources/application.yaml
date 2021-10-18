@@ -1,0 +1,6 @@
+server:
+  port: 9760
+
+spring:
+  profiles:
+    active: test #pre, prod
