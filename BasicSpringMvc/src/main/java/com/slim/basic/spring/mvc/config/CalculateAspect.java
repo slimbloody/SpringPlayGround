@@ -16,6 +16,14 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 public class CalculateAspect {
+    /**
+     * core: JointPoint 如果出现在参数列表, 一定要出现在参数列表的最前面
+     * todo: 为什么放在第一位
+     * steps:
+     * 1. 将业务逻辑组件和切面类都加入到容器中,告诉Spring哪个是切面类(@Aspect)
+     * 2. 在切面类上的每一个通知方法上标注通知注解, 告诉Spring合适何地运行(切入点表达式)
+     * 3. 开启基于注解的aop模式, @EnableAspectJAutoProxy
+     */
     @Pointcut("execution(public Integer com.slim.basic.spring.mvc.beans.CalculateComponent.*(..))")
     public void pointCut() {
     }
