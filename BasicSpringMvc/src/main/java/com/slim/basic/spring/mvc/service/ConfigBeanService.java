@@ -1,6 +1,6 @@
 package com.slim.basic.spring.mvc.service;
 
-import com.slim.basic.spring.mvc.config.TestBeanValueConfig;
+import com.slim.basic.spring.mvc.config.loadConfig.TestBeanValueConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

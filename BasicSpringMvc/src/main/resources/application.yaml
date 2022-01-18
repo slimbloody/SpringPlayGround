@@ -7,6 +7,6 @@ spring:
 
 
 
-config:
-  test:
-    beanValue1: 1
+#config:
+#  test:
+#    beanValue1: 1

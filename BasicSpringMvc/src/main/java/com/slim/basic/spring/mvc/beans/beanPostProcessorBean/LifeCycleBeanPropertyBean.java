@@ -1,4 +1,4 @@
-package com.slim.basic.spring.mvc.beans;
+package com.slim.basic.spring.mvc.beans.beanPostProcessorBean;
 
 import lombok.extern.slf4j.Slf4j;
 
