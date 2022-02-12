@@ -8,11 +8,10 @@
   <groupId>com.slim</groupId>
   <artifactId>SpringPlayGround</artifactId>
   <version>1.0.0</version>
-  <modules>
-    <module>BasicSpringMvc</module>
-  </modules>
 
-  <name>SpringPlayGround</name>
+  <modules>
+    <module>PlayGround</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

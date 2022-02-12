@@ -1,6 +1,9 @@
+// 早期是把类定义在xml里面的
 ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
-applicationContext.getBean("person");
+Person bean = (Person) applicationContext.getBean("person");
 
+改用注解式开发: 把xml配置文件换成配置类
+AnnotationConfigApplicationContext: 加载注解的ApplicationContext
 @ComponentScan: 扫包
 只要标注了@Repository, @Component 的都会被扫到
 
@@ -10,8 +13,10 @@ public class MainConfig {
     return new Person("person", 20);
   }
 }
-
+ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);
+Person bean = applicationContext.getBean(Person.class);
 applicationContext.getBeanDefinitionNames()
+applicationContext.getBeanNamesForType(Person.class);
 
 
 // 指定多种扫描规则
