@@ -1,1 +1,1 @@
--Dos.name=Linux
+-Dos.name=Windows

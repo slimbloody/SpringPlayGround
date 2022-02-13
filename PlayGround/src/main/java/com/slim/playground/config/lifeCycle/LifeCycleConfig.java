@@ -21,4 +21,14 @@ public class LifeCycleConfig {
     public LifeCycleAnnotationBean lifeCycleAnnotationBean() {
         return new LifeCycleAnnotationBean();
     }
+
+    @Bean(initMethod = "annotationInit", destroyMethod = "annotationDestroy")
+    public LifeCycleSeqBean lifeCycleSeqBean() {
+        return new LifeCycleSeqBean();
+    }
+/*
+LifeCycleSeqBean create
+LifeCycleBean init
+LifeCycleBean def-init
+ */
 }

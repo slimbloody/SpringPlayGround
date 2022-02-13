@@ -1,4 +1,4 @@
-package com.slim.playground.config;
+package com.slim.playground.config.typeFilter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
