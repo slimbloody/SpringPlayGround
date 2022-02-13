@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class AddBeanConfig {
+public class ScopeBeanConfig {
     @Bean
     @Scope("")
     public SingletonBean singletonBean() {

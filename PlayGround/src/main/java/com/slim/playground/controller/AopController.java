@@ -1,7 +1,6 @@
 package com.slim.playground.controller;
 
-import com.slim.playground.beans.CalculateComponent;
-import com.slim.playground.service.PrintBeanService;
+import com.slim.playground.config.aopPart.CalculateComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

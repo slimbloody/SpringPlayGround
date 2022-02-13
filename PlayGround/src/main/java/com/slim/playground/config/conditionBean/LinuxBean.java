@@ -1,4 +1,4 @@
-package com.slim.playground.config.conditionBean.os;
+package com.slim.playground.config.conditionBean;
 
 
 import lombok.Data;

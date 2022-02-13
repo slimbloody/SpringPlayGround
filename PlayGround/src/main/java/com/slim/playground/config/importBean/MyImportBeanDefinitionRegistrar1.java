@@ -1,4 +1,4 @@
-package com.slim.playground.config.typeFilter;
+package com.slim.playground.config.importBean;
 
 import com.slim.playground.beans.RootBean1;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;

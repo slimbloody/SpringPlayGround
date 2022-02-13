@@ -42,7 +42,7 @@ public class ScopeController extends BaseController {
         }
     }
 
-    @PostMapping("/get_lazy_false")
+    @PostMapping("/get_lazy")
     public void getLazy() {
         boolean flag = false;
         for (String name: applicationContext.getBeanDefinitionNames()) {
@@ -53,44 +53,12 @@ public class ScopeController extends BaseController {
         }
 
         if (flag) {
-            log.info("lazyBean exist");
+            log.info("lazyBean beanDefinition exist");
         } else {
-            log.info("lazyBean not exist");
+            log.info("lazyBean beanDefinition not exist");
         }
 
-        LazyBean lazyBean = (LazyBean) applicationContext.getBean("lazyBean");
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "lazyBean")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("lazyBean exist");
-        } else {
-            log.info("lazyBean not exist");
-        }
-    }
-
-    @PostMapping("/get_lazy_true")
-    public void getTrue() {
-        log.info("context load already");
-        boolean flag = false;
-        // todo: getBeanDefinitionNames 会把lazy的bean初始化
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "lazyBean")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("lazyBean exist");
-        } else {
-            log.info("lazyBean not exist");
-        }
-
+        // 直到getBean的时候才执行初始化
         LazyBean lazyBean = (LazyBean) applicationContext.getBean("lazyBean");
         for (String name: applicationContext.getBeanDefinitionNames()) {
             if (Objects.equals(name, "lazyBean")) {

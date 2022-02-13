@@ -61,3 +61,7 @@ Determine whether this filter matches for the class described by the given metad
 public interface TypeFilter {
 	boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException;
 }
+
+
+指定os.name的属性信息
+-Dos.name=windows

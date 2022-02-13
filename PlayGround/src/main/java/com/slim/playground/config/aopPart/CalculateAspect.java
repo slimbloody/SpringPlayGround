@@ -1,4 +1,4 @@
-package com.slim.playground.config;
+package com.slim.playground.config.aopPart;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -24,7 +24,7 @@ public class CalculateAspect {
      * 2. 在切面类上的每一个通知方法上标注通知注解, 告诉Spring合适何地运行(切入点表达式)
      * 3. 开启基于注解的aop模式, @EnableAspectJAutoProxy
      */
-    @Pointcut("execution(public Integer com.slim.playground.beans.CalculateComponent.*(..))")
+    @Pointcut("execution(public Integer com.slim.playground.config.aopPart.CalculateComponent.*(..))")
     public void pointCut() {
     }
 

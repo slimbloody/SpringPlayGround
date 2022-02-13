@@ -2,9 +2,7 @@ package com.slim.playground.controller;
 
 
 import com.slim.playground.config.typeFilter.ScanConfig;
-import com.slim.playground.service.PrintBeanService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

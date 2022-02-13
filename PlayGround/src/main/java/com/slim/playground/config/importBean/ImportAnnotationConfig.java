@@ -1,6 +1,5 @@
-package com.slim.playground.config.typeFilter;
+package com.slim.playground.config.importBean;
 
-import com.slim.playground.config.importBean.ImportBean1;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -14,7 +13,10 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import(
     value = {
+        // 导入组件, id默认是组件的全类名
+        // com.slim.playground.config.importBean.ImportBean1
         ImportBean1.class,
+        // 导入组件的全类名数组
         MyImportSelector1.class,
         MyImportBeanDefinitionRegistrar1.class
     }

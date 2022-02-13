@@ -1,4 +1,4 @@
-package com.slim.playground.config;
+package com.slim.playground.config.aopPart;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;

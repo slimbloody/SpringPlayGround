@@ -1,7 +1,6 @@
 package com.slim.playground.service;
 
 import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.beans.CalculateComponent;
 import com.slim.playground.beans.MyFactoryBean1;
 import com.slim.playground.beans.autowiredBean.BeanAnnotateBean;
 import com.slim.playground.beans.autowiredBean.ConstructorBean;

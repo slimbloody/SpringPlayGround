@@ -6,8 +6,13 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
+import org.springframework.util.MultiValueMap;
 
 public class WindowsCondition implements Condition {
+    /*
+    ConditionContext: 判断条件能用的上下文
+    AnnotatedTypeMetadata: 注释信息
+     */
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         // 获取到ioc使用的beanFactory
@@ -21,6 +26,8 @@ public class WindowsCondition implements Condition {
 
         // bean定义的注册类
         BeanDefinitionRegistry registry = context.getRegistry();
+
+        MultiValueMap<String, Object> map = metadata.getAllAnnotationAttributes("com.slim.playground.config.conditionBean.WindowsSettings");
 
         String property = env.getProperty("os.name");
 
