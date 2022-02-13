@@ -8,7 +8,7 @@ public class LinuxMissingBean {
     String name;
 
     public LinuxMissingBean() {
-        this.name = "Bean4";
-        log.info("create bean4");
+        this.name = "LinuxMissingBean";
+        log.info("create LinuxMissingBean");
     }
 }

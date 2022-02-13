@@ -1,23 +1,19 @@
 package com.slim.playground.service;
 
 import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.config.addBean.Bean1;
-import com.slim.playground.config.addBean.Bean2;
 import com.slim.playground.beans.CalculateComponent;
 import com.slim.playground.beans.MyFactoryBean1;
-import com.slim.playground.config.loadConfig.PropertyBean;
 import com.slim.playground.beans.autowiredBean.BeanAnnotateBean;
 import com.slim.playground.beans.autowiredBean.ConstructorBean;
 import com.slim.playground.beans.autowiredBean.ConstructorParamBean;
 import com.slim.playground.beans.autowiredBean.OrigBean;
 import com.slim.playground.beans.autowiredBean.SetMethodBean;
-import com.slim.playground.config.typeFilter.ImportAnnotationConfig;
+import com.slim.playground.config.loadConfig.PropertyBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +24,6 @@ public class PrintBeanService implements ApplicationContextAware {
 
     @Autowired
     private CalculateComponent calculateComponent;
-
-    @Autowired
-    private Bean1 bean1;
-
-    @Autowired
-    private Bean2 bean2;
 
     @Autowired
     private OrigBean origBean;
@@ -47,14 +37,6 @@ public class PrintBeanService implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-    }
-
-
-    public void getImport() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ImportAnnotationConfig.class);
-        for (String name: context.getBeanDefinitionNames()) {
-            log.info("{}", name);
-        }
     }
 
     public void getFactoryBean() {

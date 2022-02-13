@@ -13,21 +13,21 @@ import org.springframework.context.annotation.Scope;
 public class AddBeanConfig {
     @Bean
     @Scope("")
-    public Bean1 bean1() {
-        return new Bean1();
+    public SingletonBean singletonBean() {
+        return new SingletonBean();
     }
 
     // prototype表示每次获得bean都会生成一个新的对象
     @Bean
     @Scope("prototype")
-    public Bean2 bean2() {
-        return new Bean2();
+    public ProtoTypeBean protoTypeBean() {
+        return new ProtoTypeBean();
     }
 
     @Bean
     @Lazy
-    public Bean3 bean3() {
-        return new Bean3();
+    public LazyBean lazyBean() {
+        return new LazyBean();
     }
 
     @Bean

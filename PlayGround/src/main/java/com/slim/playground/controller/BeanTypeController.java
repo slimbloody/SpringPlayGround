@@ -1,8 +1,10 @@
 package com.slim.playground.controller;
 
-import com.slim.playground.config.loadConfig.TestBeanValueConfig;
+import com.slim.playground.config.addBean.LazyBean;
+import com.slim.playground.config.addBean.ProtoTypeBean;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/bean_type")
 public class BeanTypeController extends BaseController {
+    @Autowired
+    private ProtoTypeBean bean;
+
     @PostMapping("/get_bd_names")
     public void getBdNames() {
         for (String name: applicationContext.getBeanDefinitionNames()) {
@@ -18,45 +23,22 @@ public class BeanTypeController extends BaseController {
         }
     }
 
-    @PostMapping("/bean1")
-    public void printBean1() {
-        TestBeanValueConfig bean = applicationContext.getBean(TestBeanValueConfig.class);
-        System.out.println(bean.toString());
-    }
-
-    /*
-    @PostMapping("/bean2")
-    public void printBean2() {
-        service.printBean2();
-    }
-
-    @PostMapping("/bean3")
-    public void printBean3() {
-        service.printBean3();
-    }
-
-    @PostMapping("/bean3")
-    public void printBean3() {
-        service.printBean3();
-    }
-     */
-
     @PostMapping("/check_scope")
     public void checkScope() {
-        Object bean11 = applicationContext.getBean("bean1");
-        Object bean12 = applicationContext.getBean("bean1");
+        Object bean11 = applicationContext.getBean("singletonBean");
+        Object bean12 = applicationContext.getBean("singletonBean");
         if (Objects.equals(bean11, bean12)) {
-            log.info("bean1 equal");
+            log.info("singletonBean equal");
         } else {
-            log.info("bean1 not equal");
+            log.info("singletonBean not equal");
         }
 
-        Object bean21 = applicationContext.getBean("bean2");
-        Object bean22 = applicationContext.getBean("bean2");
+        Object bean21 = applicationContext.getBean("protoTypeBean");
+        Object bean22 = applicationContext.getBean("protoTypeBean");
         if (Objects.equals(bean21, bean22)) {
-            log.info("bean2 equal");
+            log.info("protoTypeBean equal");
         } else {
-            log.info("bean2 not equal");
+            log.info("protoTypeBean not equal");
         }
     }
 
@@ -64,30 +46,30 @@ public class BeanTypeController extends BaseController {
     public void getLazy() {
         boolean flag = false;
         for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
+            if (Objects.equals(name, "lazyBean")) {
                 flag = true;
                 break;
             }
         }
 
         if (flag) {
-            log.info("bean3 exist");
+            log.info("lazyBean exist");
         } else {
-            log.info("bean3 not exist");
+            log.info("lazyBean not exist");
         }
 
-        Object bean3 = applicationContext.getBean("bean3");
+        LazyBean lazyBean = (LazyBean) applicationContext.getBean("lazyBean");
         for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
+            if (Objects.equals(name, "lazyBean")) {
                 flag = true;
                 break;
             }
         }
 
         if (flag) {
-            log.info("bean3 exist");
+            log.info("lazyBean exist");
         } else {
-            log.info("bean3 not exist");
+            log.info("lazyBean not exist");
         }
     }
 
@@ -97,30 +79,30 @@ public class BeanTypeController extends BaseController {
         boolean flag = false;
         // todo: getBeanDefinitionNames 会把lazy的bean初始化
         for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
+            if (Objects.equals(name, "lazyBean")) {
                 flag = true;
                 break;
             }
         }
 
         if (flag) {
-            log.info("bean3 exist");
+            log.info("lazyBean exist");
         } else {
-            log.info("bean3 not exist");
+            log.info("lazyBean not exist");
         }
 
-        Object bean3 = applicationContext.getBean("bean3");
+        LazyBean lazyBean = (LazyBean) applicationContext.getBean("lazyBean");
         for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
+            if (Objects.equals(name, "lazyBean")) {
                 flag = true;
                 break;
             }
         }
 
         if (flag) {
-            log.info("bean3 exist");
+            log.info("lazyBean exist");
         } else {
-            log.info("bean3 not exist");
+            log.info("lazyBean not exist");
         }
     }
 }

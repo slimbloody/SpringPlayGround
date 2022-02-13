@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ser.Serializers.Base;
 import com.slim.playground.service.PrintBeanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController extends BaseController {
     @Autowired
     private PrintBeanService service;
-
-    @PostMapping("/get_import")
-    public void getImport() {
-        service.getImport();
-    }
 
     @PostMapping("/get_factory_bean")
     public void getFactoryBean() {
