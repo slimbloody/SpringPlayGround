@@ -12,6 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/life_cycle")
 public class LifeCycleController {
+    /*
+				// 初始化所有的单实例对象之后
+				// Instantiate all remaining (non-lazy-init) singletons.
+				finishBeanFactoryInitialization(beanFactory);
+     */
+
     @PostMapping("/test")
     public void test() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
