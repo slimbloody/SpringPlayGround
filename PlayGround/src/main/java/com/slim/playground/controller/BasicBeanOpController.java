@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/basic_op")
 public class BasicBeanOpController extends BaseController {
-    @Autowired
-    private PrintBeanService service;
-
     // 测试filterType
     @PostMapping("/component_scans")
     public void componentScans() {

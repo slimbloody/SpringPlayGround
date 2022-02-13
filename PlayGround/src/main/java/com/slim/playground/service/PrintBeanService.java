@@ -23,9 +23,6 @@ public class PrintBeanService implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Autowired
-    private CalculateComponent calculateComponent;
-
-    @Autowired
     private OrigBean origBean;
 
     @Autowired
@@ -104,13 +101,5 @@ public class PrintBeanService implements ApplicationContextAware {
         log.info("constructorParamBean: {}", constructorParamBean.toString());
         log.info("beanAnnotateBean: {}", beanAnnotateBean.toString());
         log.info("origBean: {}", origBean);
-    }
-
-    public void printAop() {
-        Integer integer1 = calculateComponent.addCalculate(1, 2);
-        log.info("cal val: {}", integer1);
-
-        Integer integer2 = calculateComponent.addCalculateThrowException(1, 2);
-        log.info("cal val: {}", integer2);
     }
 }

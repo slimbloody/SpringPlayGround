@@ -1,10 +1,8 @@
 package com.slim.playground.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers.Base;
 import com.slim.playground.service.PrintBeanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,17 +32,5 @@ public class TestController extends BaseController {
     @PostMapping("/get_autowired_bean_diff")
     public void getAutowiredBeanDiff() {
         service.getAutowiredBeanDiff();
-    }
-
-/*
-beforeAround
-before
-addCalculate
-afterAround
-after
- */
-    @PostMapping("/print_aop")
-    public void printAop() {
-        service.printAop();
     }
 }

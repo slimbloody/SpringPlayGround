@@ -1,7 +1,7 @@
 package com.slim.playground.controller;
 
-import com.slim.playground.config.addBean.LazyBean;
-import com.slim.playground.config.addBean.ProtoTypeBean;
+import com.slim.playground.config.scopeBean.LazyBean;
+import com.slim.playground.config.scopeBean.ProtoTypeBean;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("/bean_type")
-public class BeanTypeController extends BaseController {
+@RequestMapping("/scope")
+public class ScopeController extends BaseController {
     @Autowired
     private ProtoTypeBean bean;
 

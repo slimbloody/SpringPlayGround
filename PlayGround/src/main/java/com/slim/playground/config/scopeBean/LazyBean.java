@@ -1,4 +1,4 @@
-package com.slim.playground.config.addBean;
+package com.slim.playground.config.scopeBean;
 
 
 import lombok.Data;

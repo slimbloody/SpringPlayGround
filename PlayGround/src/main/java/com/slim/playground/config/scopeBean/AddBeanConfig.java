@@ -1,4 +1,4 @@
-package com.slim.playground.config.addBean;
+package com.slim.playground.config.scopeBean;
 
 import com.slim.playground.beans.AutowiredBean;
 import com.slim.playground.beans.MyFactoryBean1;
