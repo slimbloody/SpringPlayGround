@@ -4,15 +4,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.FactoryBean;
 
 @Slf4j
-public class MyFactoryBean1 implements FactoryBean<FactoryBean1> {
+public class MyFactoryBean1 implements FactoryBean<GenBean1> {
+    // 返回一个对象, 将这个对象添加到容器中
     @Override
-    public FactoryBean1 getObject() throws Exception {
-        return new FactoryBean1();
+    public GenBean1 getObject() throws Exception {
+        return new GenBean1();
     }
 
     @Override
     public Class<?> getObjectType() {
-        return FactoryBean1.class;
+        return GenBean1.class;
     }
 
     @Override

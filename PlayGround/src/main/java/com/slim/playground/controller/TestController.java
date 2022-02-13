@@ -14,11 +14,6 @@ public class TestController extends BaseController {
     @Autowired
     private PrintBeanService service;
 
-    @PostMapping("/get_factory_bean")
-    public void getFactoryBean() {
-        service.getFactoryBean();
-    }
-
     @PostMapping("/get_env")
     public void getEnv() {
         service.getEnv();
@@ -29,8 +24,8 @@ public class TestController extends BaseController {
         service.getAutowiredBean();
     }
 
-    @PostMapping("/get_autowired_bean_diff")
-    public void getAutowiredBeanDiff() {
-        service.getAutowiredBeanDiff();
-    }
+    // @PostMapping("/get_autowired_bean_diff")
+    // public void getAutowiredBeanDiff() {
+    //     service.getAutowiredBeanDiff();
+    // }
 }

@@ -1,10 +1,8 @@
 package com.slim.playground.controller;
 
 import com.slim.playground.config.scopeBean.LazyBean;
-import com.slim.playground.config.scopeBean.ProtoTypeBean;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,16 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/scope")
 public class ScopeController extends BaseController {
-    @Autowired
-    private ProtoTypeBean bean;
-
-    @PostMapping("/get_bd_names")
-    public void getBdNames() {
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            log.info("{}", name);
-        }
-    }
-
     @PostMapping("/check_scope")
     public void checkScope() {
         Object bean11 = applicationContext.getBean("singletonBean");

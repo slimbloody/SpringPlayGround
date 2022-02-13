@@ -1,4 +1,4 @@
-package com.slim.playground.config.beanPostProcessorBean;
+package com.slim.playground.config.lifeCycle;
 
 import lombok.extern.slf4j.Slf4j;
 

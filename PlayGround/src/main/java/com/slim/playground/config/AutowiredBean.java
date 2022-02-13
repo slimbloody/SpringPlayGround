@@ -1,4 +1,4 @@
-package com.slim.playground.beans;
+package com.slim.playground.config;
 
 import lombok.Data;
 import org.springframework.stereotype.Repository;

@@ -1,12 +1,6 @@
 package com.slim.playground.service;
 
-import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
-import com.slim.playground.config.autowiredBean.BeanAnnotateBean;
-import com.slim.playground.config.autowiredBean.ConstructorBean;
-import com.slim.playground.config.autowiredBean.ConstructorParamBean;
-import com.slim.playground.config.autowiredBean.OrigBean;
-import com.slim.playground.config.autowiredBean.SetMethodBean;
+import com.slim.playground.config.AutowiredBean;
 import com.slim.playground.config.loadConfig.PropertyBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -22,9 +16,6 @@ public class PrintBeanService implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Autowired
-    private OrigBean origBean;
-
-    @Autowired
     private AutowiredBean autowiredBean;
 
     @Autowired
@@ -33,32 +24,6 @@ public class PrintBeanService implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-    }
-
-    public void getFactoryBean() {
-        Object bean = applicationContext.getBean("myFactoryBean1");
-        // class com.slim.playground.config.importBean.factoryWay.FactoryBean1
-        // 工厂bean调用的getObject创建的对象
-        // 如果singleton改成了false每次都会创建一个新的 getObject创建的对象
-        log.info("{}", bean.getClass());
-
-        /*
-        BeanFactory
-        String FACTORY_BEAN_PREFIX = "&";
-        Used to dereference a FactoryBean instance and distinguish it from beans created by the FactoryBean,
-        it will return the factory, not the instance returned by the factory
-        */
-        Object factoryBean = applicationContext.getBean("&myFactoryBean1");
-        log.info("{}", factoryBean.getClass());
-
-        // todo: 强转FactoryBean 出错
-        MyFactoryBean1 myFactoryBean1 = (MyFactoryBean1) applicationContext.getBean("&myFactoryBean1");
-        try {
-            // 创建新的bean
-            log.info("{}", myFactoryBean1.getObject().getClass());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void getEnv() {
@@ -89,6 +54,7 @@ public class PrintBeanService implements ApplicationContextAware {
         log.info(autowiredBean2.getLabel());
     }
 
+    /*
     public void getAutowiredBeanDiff() {
         SetMethodBean setMethodBean = applicationContext.getBean(SetMethodBean.class);
         ConstructorBean constructorBean = applicationContext.getBean(ConstructorBean.class);
@@ -101,4 +67,5 @@ public class PrintBeanService implements ApplicationContextAware {
         log.info("beanAnnotateBean: {}", beanAnnotateBean.toString());
         log.info("origBean: {}", origBean);
     }
+     */
 }

@@ -1,9 +1,6 @@
 package com.slim.playground.config.scopeBean;
 
-import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
-import com.slim.playground.config.autowiredBean.BeanAnnotateBean;
-import com.slim.playground.config.autowiredBean.OrigBean;
+import com.slim.playground.config.AutowiredBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -30,11 +27,6 @@ public class ScopeBeanConfig {
         return new LazyBean();
     }
 
-    @Bean
-    public MyFactoryBean1 myFactoryBean1() {
-        return new MyFactoryBean1();
-    }
-
     @Bean("autowiredBean2")
     public AutowiredBean autowiredBean() {
         AutowiredBean autowiredBean = new AutowiredBean();
@@ -42,10 +34,10 @@ public class ScopeBeanConfig {
         return autowiredBean;
     }
 
-    @Bean
-    public BeanAnnotateBean beanAnnotateBean(OrigBean origBean) {
-        BeanAnnotateBean bean = new BeanAnnotateBean();
-        bean.setOrigBean(origBean);
-        return bean;
-    }
+    // @Bean
+    // public BeanAnnotateBean beanAnnotateBean(OrigBean origBean) {
+    //     BeanAnnotateBean bean = new BeanAnnotateBean();
+    //     bean.setOrigBean(origBean);
+    //     return bean;
+    // }
 }

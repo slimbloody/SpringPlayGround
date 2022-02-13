@@ -5,11 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
-public class FactoryBean1 {
+public class GenBean1 {
     String name;
 
-    public FactoryBean1() {
-        this.name = "FactoryBean1";
-        log.info("create FactoryBean1");
+    public GenBean1() {
+        this.name = "GenBean1";
+        log.info("create GenBean1");
     }
 }
