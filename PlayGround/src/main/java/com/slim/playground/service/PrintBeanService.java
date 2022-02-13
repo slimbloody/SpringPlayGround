@@ -1,20 +1,17 @@
 package com.slim.playground.service;
 
 import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.beans.Bean1;
-import com.slim.playground.beans.Bean2;
+import com.slim.playground.config.addBean.Bean1;
+import com.slim.playground.config.addBean.Bean2;
 import com.slim.playground.beans.CalculateComponent;
 import com.slim.playground.beans.MyFactoryBean1;
-import com.slim.playground.beans.PropertyBean1;
+import com.slim.playground.config.loadConfig.PropertyBean;
 import com.slim.playground.beans.autowiredBean.BeanAnnotateBean;
 import com.slim.playground.beans.autowiredBean.ConstructorBean;
 import com.slim.playground.beans.autowiredBean.ConstructorParamBean;
 import com.slim.playground.beans.autowiredBean.OrigBean;
 import com.slim.playground.beans.autowiredBean.SetMethodBean;
-import com.slim.playground.config.ImportAnnotationConfig;
-import com.slim.playground.config.loadConfig.TestBeanValueConfig;
-import com.slim.playground.config.typeFilter.ScanConfig;
-import java.util.Objects;
+import com.slim.playground.config.typeFilter.ImportAnnotationConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,103 +49,6 @@ public class PrintBeanService implements ApplicationContextAware {
         this.applicationContext = applicationContext;
     }
 
-    public void printBean1() {
-        TestBeanValueConfig bean = applicationContext.getBean(TestBeanValueConfig.class);
-        System.out.println(bean.toString());
-    }
-
-    public void print() {
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            log.info("{}", name);
-        }
-    }
-
-    public void checkScope() {
-        Object bean11 = applicationContext.getBean("bean1");
-        Object bean12 = applicationContext.getBean("bean1");
-        if (Objects.equals(bean11, bean12)) {
-            log.info("bean1 equal");
-        } else {
-            log.info("bean1 not equal");
-        }
-
-        Object bean21 = applicationContext.getBean("bean2");
-        Object bean22 = applicationContext.getBean("bean2");
-        if (Objects.equals(bean21, bean22)) {
-            log.info("bean2 equal");
-        } else {
-            log.info("bean2 not equal");
-        }
-    }
-
-    public void getLazyTrue() {
-        log.info("context load already");
-        boolean flag = false;
-        // todo: getBeanDefinitionNames 会把lazy的bean初始化
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("bean3 exist");
-        } else {
-            log.info("bean3 not exist");
-        }
-
-        Object bean3 = applicationContext.getBean("bean3");
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("bean3 exist");
-        } else {
-            log.info("bean3 not exist");
-        }
-    }
-
-    public void getLazyFalse() {
-        boolean flag = false;
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("bean3 exist");
-        } else {
-            log.info("bean3 not exist");
-        }
-
-        Object bean3 = applicationContext.getBean("bean3");
-        for (String name: applicationContext.getBeanDefinitionNames()) {
-            if (Objects.equals(name, "bean3")) {
-                flag = true;
-                break;
-            }
-        }
-
-        if (flag) {
-            log.info("bean3 exist");
-        } else {
-            log.info("bean3 not exist");
-        }
-    }
-
-    public void componentScans() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ScanConfig.class);
-        for (String name: context.getBeanDefinitionNames()) {
-            log.info("{}", name);
-        }
-    }
 
     public void getImport() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ImportAnnotationConfig.class);
@@ -188,8 +88,8 @@ public class PrintBeanService implements ApplicationContextAware {
         String nickName = environment.getProperty("person.nickName");
         log.info("properties: {}", nickName);
 
-        PropertyBean1 propertyBean1 = (PropertyBean1) applicationContext.getBean("propertyBean1");
-        log.info("propertyBean1: {}", propertyBean1);
+        PropertyBean propertyBean = (PropertyBean) applicationContext.getBean("propertyBean1");
+        log.info("propertyBean1: {}", propertyBean);
     }
 
     public void getAutowiredBean() {

@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Service;
 
+// 每个filter只管component里面的value这里的包
 @ComponentScans(
     value = {
         // 按顺序从上到下filter

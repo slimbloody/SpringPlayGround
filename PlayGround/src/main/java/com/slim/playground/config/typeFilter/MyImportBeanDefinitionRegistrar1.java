@@ -1,4 +1,4 @@
-package com.slim.playground.config;
+package com.slim.playground.config.typeFilter;
 
 import com.slim.playground.beans.RootBean1;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -12,7 +12,7 @@ public class MyImportBeanDefinitionRegistrar1 implements ImportBeanDefinitionReg
         // todo: ((DefaultListableBeanFactory) registry).beanDefinitionMap
         // 什么时候用全类名
         // 启动的时候bean1, bean2 没有全类名
-        boolean hasImportBean1 = registry.containsBeanDefinition("com.slim.playground.beans.ImportBean1");
+        boolean hasImportBean1 = registry.containsBeanDefinition("com.slim.playground.config.importBean.ImportBean1");
         boolean hasImportBean2 = registry.containsBeanDefinition("com.slim.playground.beans.ImportBean2");
 
         if (hasImportBean1 && hasImportBean2) {

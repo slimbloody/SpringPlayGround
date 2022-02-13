@@ -20,6 +20,7 @@ public class ComponentCustomFilter1 implements TypeFilter {
         // 获取当前类资源(类的路径)
         Resource resource = metadataReader.getResource();
 
+        System.out.println(classMetadata.getClassName());
         // todo: ExcludeClazz被打印出来了
         return classMetadata.getClassName().contains("ExcludeClazz");
     }

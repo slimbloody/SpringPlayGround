@@ -1,4 +1,4 @@
-package com.slim.playground.config.condition;
+package com.slim.playground.config.conditionBean;
 
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class WindowsCondition implements Condition {
+public class LinuxCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         // 获取到ioc使用的beanFactory
@@ -24,10 +24,10 @@ public class WindowsCondition implements Condition {
 
         String property = env.getProperty("os.name");
 
-        if (property.contains("Windows")) {
+        if (property.contains("Linux")) {
             return true;
-        }
 
+        }
         return false;
     }
 }

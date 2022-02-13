@@ -1,6 +1,5 @@
-package com.slim.playground.config;
+package com.slim.playground.config.loadConfig;
 
-import com.slim.playground.beans.PropertyBean1;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.PropertySources;
 })
 public class PropertyConfig {
     @Bean
-    public PropertyBean1 propertyBean1() {
-        return new PropertyBean1();
+    public PropertyBean propertyBean1() {
+        return new PropertyBean();
     }
 }

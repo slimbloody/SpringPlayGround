@@ -1,4 +1,4 @@
-package com.slim.playground.config;
+package com.slim.playground.config.typeFilter;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
@@ -9,8 +9,8 @@ public class MyImportSelector1 implements ImportSelector {
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
         return new String[]{
-            "com.slim.playground.beans.ImportSelectorBean1",
-            "com.slim.playground.beans.ImportSelectorBean2"
+            "com.slim.playground.config.importBean.ImportSelectorBean1",
+            "com.slim.playground.config.importBean.ImportSelectorBean2"
         };
     }
 }
