@@ -29,6 +29,8 @@ public class ConfigController extends BaseController {
         for (String name: context.getBeanDefinitionNames()) {
             log.info("{}", name);
         }
+
+        context.close();
     }
 
     /*
@@ -45,6 +47,8 @@ public class ConfigController extends BaseController {
         for (String name: context.getBeanDefinitionNames()) {
             log.info("{}", name);
         }
+
+        context.close();
     }
 
 
@@ -94,6 +98,8 @@ public class ConfigController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        context.close();
     }
 
     @PostMapping("/bean1")

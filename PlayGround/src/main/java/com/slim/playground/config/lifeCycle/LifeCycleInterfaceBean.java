@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 @Slf4j
 public class LifeCycleInterfaceBean implements InitializingBean, DisposableBean {
     public LifeCycleInterfaceBean() {
+        log.info("LifeCycleInterfaceBean create");
     }
 
     @Override
