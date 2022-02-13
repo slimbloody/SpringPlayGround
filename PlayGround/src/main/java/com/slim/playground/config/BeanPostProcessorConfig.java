@@ -1,8 +1,8 @@
 package com.slim.playground.config;
 
-import com.slim.playground.beans.beanPostProcessorBean.LifeCycleAnnotationBean;
-import com.slim.playground.beans.beanPostProcessorBean.LifeCycleBeanPropertyBean;
-import com.slim.playground.beans.beanPostProcessorBean.LifeCycleInterfaceBean;
+import com.slim.playground.config.beanPostProcessorBean.LifeCycleAnnotationBean;
+import com.slim.playground.config.beanPostProcessorBean.LifeCycleBeanPropertyBean;
+import com.slim.playground.config.beanPostProcessorBean.LifeCycleInterfaceBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

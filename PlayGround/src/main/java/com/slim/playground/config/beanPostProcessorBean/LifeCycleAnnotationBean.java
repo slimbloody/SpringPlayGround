@@ -1,4 +1,4 @@
-package com.slim.playground.beans.beanPostProcessorBean;
+package com.slim.playground.config.beanPostProcessorBean;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

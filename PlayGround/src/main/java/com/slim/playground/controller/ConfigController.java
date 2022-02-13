@@ -3,7 +3,7 @@ package com.slim.playground.controller;
 
 import com.slim.playground.config.conditionBean.ConditionBeanConfig;
 import com.slim.playground.config.loadConfig.TestBeanValueConfig;
-import com.slim.playground.config.importBean.ImportAnnotationConfig;
+import com.slim.playground.config.importBean.importWay.ImportAnnotationConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.PostMapping;

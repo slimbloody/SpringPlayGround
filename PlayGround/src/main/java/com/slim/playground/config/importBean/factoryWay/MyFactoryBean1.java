@@ -1,4 +1,4 @@
-package com.slim.playground.beans;
+package com.slim.playground.config.importBean.factoryWay;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.FactoryBean;

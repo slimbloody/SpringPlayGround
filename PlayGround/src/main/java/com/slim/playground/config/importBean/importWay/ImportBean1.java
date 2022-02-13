@@ -1,4 +1,4 @@
-package com.slim.playground.config.importBean;
+package com.slim.playground.config.importBean.importWay;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

@@ -1,8 +1,10 @@
-package com.slim.playground.beans;
+package com.slim.playground.config.importBean.factoryWay;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Data
 public class FactoryBean1 {
     String name;
 

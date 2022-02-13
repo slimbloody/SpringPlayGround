@@ -1,9 +1,9 @@
 package com.slim.playground.config.scopeBean;
 
 import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.beans.MyFactoryBean1;
-import com.slim.playground.beans.autowiredBean.BeanAnnotateBean;
-import com.slim.playground.beans.autowiredBean.OrigBean;
+import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
+import com.slim.playground.config.autowiredBean.BeanAnnotateBean;
+import com.slim.playground.config.autowiredBean.OrigBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;

@@ -1,4 +1,4 @@
-package com.slim.playground.beans.autowiredBean;
+package com.slim.playground.config.autowiredBean;
 
 import lombok.Data;
 

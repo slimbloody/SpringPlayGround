@@ -1,12 +1,12 @@
 package com.slim.playground.service;
 
 import com.slim.playground.beans.AutowiredBean;
-import com.slim.playground.beans.MyFactoryBean1;
-import com.slim.playground.beans.autowiredBean.BeanAnnotateBean;
-import com.slim.playground.beans.autowiredBean.ConstructorBean;
-import com.slim.playground.beans.autowiredBean.ConstructorParamBean;
-import com.slim.playground.beans.autowiredBean.OrigBean;
-import com.slim.playground.beans.autowiredBean.SetMethodBean;
+import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
+import com.slim.playground.config.autowiredBean.BeanAnnotateBean;
+import com.slim.playground.config.autowiredBean.ConstructorBean;
+import com.slim.playground.config.autowiredBean.ConstructorParamBean;
+import com.slim.playground.config.autowiredBean.OrigBean;
+import com.slim.playground.config.autowiredBean.SetMethodBean;
 import com.slim.playground.config.loadConfig.PropertyBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -37,7 +37,7 @@ public class PrintBeanService implements ApplicationContextAware {
 
     public void getFactoryBean() {
         Object bean = applicationContext.getBean("myFactoryBean1");
-        // class com.slim.playground.beans.FactoryBean1
+        // class com.slim.playground.config.importBean.factoryWay.FactoryBean1
         // 工厂bean调用的getObject创建的对象
         // 如果singleton改成了false每次都会创建一个新的 getObject创建的对象
         log.info("{}", bean.getClass());
