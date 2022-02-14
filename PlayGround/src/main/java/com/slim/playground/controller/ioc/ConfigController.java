@@ -1,19 +1,30 @@
-package com.slim.playground.controller;
+package com.slim.playground.controller.ioc;
 
 
+import com.slim.playground.config.autowiredBean.AutowiredBean;
+import com.slim.playground.config.autowiredBean.AutowiredConfig;
+import com.slim.playground.config.autowiredBean.ConstructorBean;
+import com.slim.playground.config.autowiredBean.ConstructorParamBean;
+import com.slim.playground.config.autowiredBean.OrigBean;
+import com.slim.playground.config.autowiredBean.SetMethodBean;
 import com.slim.playground.config.conditionBean.ConditionBeanConfig;
-import com.slim.playground.config.importBean.factoryWay.GenBean1;
+import com.slim.playground.config.conditionBean.ProfileBean;
+import com.slim.playground.config.conditionBean.ProfileConfig;
+import com.slim.playground.config.conditionBean.ProfilePreciseConfig;
 import com.slim.playground.config.importBean.factoryWay.FactoryWayConfig;
+import com.slim.playground.config.importBean.factoryWay.GenBean1;
 import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
 import com.slim.playground.config.importBean.importWay.ImportAnnotationConfig;
+import com.slim.playground.config.loadConfig.PropertyBean;
 import com.slim.playground.config.loadConfig.TestBeanValueConfig;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +33,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/config")
 public class ConfigController extends BaseController {
+    @Autowired
+    private Environment env;
+
+    @Autowired
+    private AutowiredBean autowiredBean;
+
+    @Autowired
+    private AutowiredBean autowiredBean2;
+
     @PostMapping("/condition")
     public void condition() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ConditionBeanConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+            ConditionBeanConfig.class,
+            ProfileConfig.class
+            // ProfilePreciseConfig.class
+        );
         log.info("=====start context=========");
         for (String name: context.getBeanDefinitionNames()) {
             log.info("{}", name);
@@ -102,9 +126,40 @@ public class ConfigController extends BaseController {
         context.close();
     }
 
-    @PostMapping("/bean1")
-    public void printBean1() {
+    @PostMapping("/property")
+    public void property() {
         TestBeanValueConfig bean = applicationContext.getBean(TestBeanValueConfig.class);
-        System.out.println(bean.toString());
+        log.info("TestBeanValueConfig: {}", bean);
+
+        PropertyBean propertyBean = applicationContext.getBean(PropertyBean.class);
+        String nickName1 = propertyBean.getNickName();
+        String nickName = env.getProperty("person.nickName");
+        log.info("{}", Objects.equals(nickName, nickName1));
+    }
+
+    @PostMapping("/autowired")
+    public void autowired() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AutowiredConfig.class);
+        // BeanAnnotateBean 产生的
+        log.info("{}", context.getBean(OrigBean.class));
+        log.info("{}", context.getBean(ConstructorBean.class));
+        log.info("{}", context.getBean(ConstructorParamBean.class));
+        log.info("{}", context.getBean(SetMethodBean.class));
+        context.close();
+    }
+
+    @PostMapping("/get_autowired_bean")
+    public void getAutowiredBean() {
+        /*
+        1. 默认优先按照类型去容器中找对应组件: applicationContext.getBean(AutowiredBean.class);
+        2. 如果找到了多个相同类型的组件, 再将属性名作为组件的id去容器中查找
+        3. @Qualifier("xxx"), 指定组件的id
+        4. 自动装配默认一定要将属性赋值好, 没有就会报错
+        @Autowired(required = false), 不需要一定组装好
+        5. @Primary, 自动装配的时候首选的装配
+        6. resource和inject是java的规范,也可以实现自动装配
+         */
+        log.info(autowiredBean.getLabel());
+        log.info(autowiredBean2.getLabel());
     }
 }

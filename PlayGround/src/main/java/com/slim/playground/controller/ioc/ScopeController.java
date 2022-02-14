@@ -1,4 +1,4 @@
-package com.slim.playground.controller;
+package com.slim.playground.controller.ioc;
 
 import com.slim.playground.config.scopeBean.LazyBean;
 import java.util.Objects;

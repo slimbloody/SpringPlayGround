@@ -1,6 +1,6 @@
 package com.slim.playground.config.scopeBean;
 
-import com.slim.playground.config.AutowiredBean;
+import com.slim.playground.config.autowiredBean.AutowiredBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;

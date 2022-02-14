@@ -1,4 +1,4 @@
-package com.slim.playground.controller;
+package com.slim.playground.controller.ioc;
 
 
 import com.slim.playground.config.lifeCycle.LifeCycleConfig;
@@ -33,8 +33,23 @@ todo: populateBean的时候也会执行一些beanPostProcessor
 
     /*
     spring底层对 beanPostProcessor 的使用
+    1.
     ApplicationContextAwareProcessor: 往组件里面注入ioc容器
     implement ApplicationContextAware
     org.springframework.context.support.ApplicationContextAwareProcessor#postProcessBeforeInitialization
+
+    bean instanceof EnvironmentAware || bean instanceof EmbeddedValueResolverAware ||
+	bean instanceof ResourceLoaderAware || bean instanceof ApplicationEventPublisherAware ||
+	bean instanceof MessageSourceAware || bean instanceof ApplicationContextAware
+	如果是这些instance,则调用org.springframework.context.support.ApplicationContextAwareProcessor.invokeAwareInterfaces
+	注入值, setXXX(this.xxx)
+
+	2. BeanValidation
+    3. InitDestroyAnnotationBeanPostProcessor
+    处理@PostConstruct @PreDestroy
+    4. AutowiredAnnotationBeanPostProcessor
+    处理自动装配的注解
+    5. AsyncAnnotationBeanPostProcessor
+    @Async注解
      */
 }

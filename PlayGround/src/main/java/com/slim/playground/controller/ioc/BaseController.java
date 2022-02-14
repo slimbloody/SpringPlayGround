@@ -1,4 +1,4 @@
-package com.slim.playground.controller;
+package com.slim.playground.controller.ioc;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;

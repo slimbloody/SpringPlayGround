@@ -1,6 +1,7 @@
-package com.slim.playground.controller;
+package com.slim.playground.controller.aop;
 
 import com.slim.playground.config.aopPart.CalculateComponent;
+import com.slim.playground.controller.ioc.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

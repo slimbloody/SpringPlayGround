@@ -1,8 +1,11 @@
-package com.slim.playground.config;
+package com.slim.playground.config.lifeCycle;
 
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -21,6 +24,20 @@ public class AwareTestComponent implements ApplicationContextAware, BeanNameAwar
     @Autowired
     private ApplicationContext applicationContext;
 
+    /*
+    Set the name of the bean in the bean factory that created this bean.
+    Invoked after population of normal bean properties but before an init
+    callback such as InitializingBean.afterPropertiesSet() or a custom
+    init-method.
+
+    Params:
+        name – the name of the bean in the factory. Note that this name
+        is the actual bean name used in the factory, which may differ from
+        the originally specified name: in particular for inner bean names,
+        the actual bean name might have been made unique through appending
+        "#..." suffixes. Use the BeanFactoryUtils.originalBeanName(String)
+        method to extract the original bean name (without suffix),if desired.
+     */
     @Override
     public void setBeanName(String name) {
         log.info("name: {}", name);

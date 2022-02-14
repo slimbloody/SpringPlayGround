@@ -1,10 +1,11 @@
 package com.slim.playground.config.typeFilter;
 
-import com.slim.playground.service.PrintBeanService;
+import com.slim.playground.controller.ioc.BasicBeanOpController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 // 每个filter只管component里面的value这里的包
 @ComponentScans(
@@ -25,8 +26,8 @@ import org.springframework.stereotype.Service;
         @ComponentScan(
             value = {"com.slim.basic.spring.mvc"},
             includeFilters = {
-                @ComponentScan.Filter(type=FilterType.ANNOTATION, classes = {Service.class}),
-                @ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, classes = {PrintBeanService.class})
+                @ComponentScan.Filter(type=FilterType.ANNOTATION, classes = {RestController.class}),
+                @ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, classes = {BasicBeanOpController.class})
             },
             useDefaultFilters = false
         )
