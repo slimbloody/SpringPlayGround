@@ -1,15 +1,22 @@
 package com.slim.playground.config.conditionBean;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.EmbeddedValueResolverAware;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.StringValueResolver;
 
-// todo: 为什么implements之后就跑不动了
+
+/*
+设置profile的方法:
+1. -Dspring.profiles.active=test,pre
+2. 代码方式
+applicationContext.getEnvironment().setActiveProfiles("test", "dev");
+applicationContext.register(ProfileConfig.class);
+applicationContext.refresh();
+ */
+
 @PropertySource("classpath:/person.properties")
 public class ProfileConfig implements EmbeddedValueResolverAware {
     private StringValueResolver valueResolver;

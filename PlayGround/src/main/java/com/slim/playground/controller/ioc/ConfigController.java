@@ -8,9 +8,7 @@ import com.slim.playground.config.autowiredBean.ConstructorParamBean;
 import com.slim.playground.config.autowiredBean.OrigBean;
 import com.slim.playground.config.autowiredBean.SetMethodBean;
 import com.slim.playground.config.conditionBean.ConditionBeanConfig;
-import com.slim.playground.config.conditionBean.ProfileBean;
 import com.slim.playground.config.conditionBean.ProfileConfig;
-import com.slim.playground.config.conditionBean.ProfilePreciseConfig;
 import com.slim.playground.config.importBean.factoryWay.FactoryWayConfig;
 import com.slim.playground.config.importBean.factoryWay.GenBean1;
 import com.slim.playground.config.importBean.factoryWay.MyFactoryBean1;
@@ -47,7 +45,6 @@ public class ConfigController extends BaseController {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
             ConditionBeanConfig.class,
             ProfileConfig.class
-            // ProfilePreciseConfig.class
         );
         log.info("=====start context=========");
         for (String name: context.getBeanDefinitionNames()) {
