@@ -4,8 +4,8 @@ server:
 spring:
   profiles:
     active: test #pre, prod
-
-
+    main:
+      web-application-type: none
 
 #config:
 #  test:

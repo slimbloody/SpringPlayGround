@@ -23,6 +23,7 @@
     <mapstruct.version>1.4.2.Final</mapstruct.version>
     <lombok.version>1.18.20</lombok.version>
     <javax.version>1</javax.version>
+    <mysql-connector.version>8.0.28</mysql-connector.version>
   </properties>
 
   <dependencyManagement>
@@ -37,6 +38,18 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-aop</artifactId>
         <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector.version}</version>
       </dependency>
 
       <dependency>
