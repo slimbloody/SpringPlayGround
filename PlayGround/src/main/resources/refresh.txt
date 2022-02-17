@@ -1,0 +1,81 @@
+org.springframework.context.support.AbstractApplicationContext#refresh
+
+
+1. 刷新前的预处理工作
+org.springframework.context.support.AbstractApplicationContext#prepareRefresh
+    1. 初始化一些属性设置
+		// Initialize any placeholder property sources in the context environment.
+		initPropertySources();
+		空的, 留给子类去做自定义属性设置的
+
+		2. 进行一些属性校验的
+		// Validate that all properties marked as required are resolvable:
+		// see ConfigurablePropertyResolver#setRequiredProperties
+		getEnvironment().validateRequiredProperties();
+
+		todo:
+		org.springframework.core.env.AbstractPropertyResolver#validateRequiredProperties
+
+	  @Override
+	  public void validateRequiredProperties() {
+	  	MissingRequiredPropertiesException ex = new MissingRequiredPropertiesException();
+	  	for (String key : this.requiredProperties) {
+	  		if (this.getProperty(key) == null) {
+	  			ex.addMissingRequiredProperty(key);
+	  		}
+	  	}
+	  	if (!ex.getMissingRequiredProperties().isEmpty()) {
+	  		throw ex;
+	  	}
+	  }
+
+	  todo: 这里没有属性的话会抛exception, 为什么我们在nacos里面没取到属性bean还能正常工作的
+
+		3. 保存容器中的一些早期的事件
+		  // Store pre-refresh ApplicationListeners...
+			this.earlyApplicationListeners = new LinkedHashSet<>(this.applicationListeners);
+
+
+2. 获取bean工厂:
+// Tell the subclass to refresh the internal bean factory.
+ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+		1.刷新bean工厂
+		refreshBeanFactory();
+		GenericApplicationContext 的无参构造器里面 new 出来的 DefaultListableBeanFactory, 主要还是设置setSerializationId
+
+		2. 把刚才创建的beanFactory返回回来了
+		return getBeanFactory();
+
+3. BeanFactory 做预准备工作, 做一些设置
+// Prepare the bean factory for use in this context.
+prepareBeanFactory(beanFactory);
+    1. 设置BeanFactory的类加载器, 支持表达式解析器...
+    2. 添加部分 BeanPostProcessor, 比如 ApplicationContextAwareProcessor(判断bean初始化以后是否实现了ApplicationContextAware接口)
+    3. 设置忽略的自动装配的接口
+        EnvironmentAware,
+        EmbeddedValueResolverAware,
+        ResourceLoaderAware,
+        ApplicationEventPublisherAware,
+        MessageSourceAware,
+        ApplicationContextAware
+        这些接口不能通过接口类型自动注入
+    4. 注册可以解析的自动装配: 我们能直接在任何组件中自动注入的:
+        BeanFactory
+        ResourceLoader
+        ApplicationEventPublisher
+        ApplicationContext
+    5. 添加BeanPostProcessor[ApplicationListenerDetector]
+		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(this));
+		6. 添加编译时的AspectJ支持
+		7. 在beanFactory 中注册一些能用的组件
+
+
+
+39
+7
+19
+20
+22
+18
+21
+17
