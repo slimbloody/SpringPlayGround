@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 public class BaseController implements ApplicationContextAware {
-    @Autowired
     protected ApplicationContext applicationContext;
 
+    // 参考spring-cloud-alibaba项目, 是为了setApplication的时候顺带初始化其他的bean, eg: FeignContract
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         // todo: 找到自己创建的bean

@@ -1,8 +1,6 @@
-package com.slim.playground.extConfig.BeanFactoryPostProcessorExt;
+package com.slim.playground.configExt.BeanFactoryPostProcessorExt;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Data

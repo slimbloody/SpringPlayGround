@@ -1,4 +1,4 @@
-package com.slim.playground.extConfig.ApplicationListenerExt;
+package com.slim.playground.configExt.ApplicationListenerExt;
 
 import org.springframework.context.annotation.Import;
 

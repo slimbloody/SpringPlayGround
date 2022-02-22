@@ -1,6 +1,6 @@
-package com.slim.playground.extConfig.BeanFactoryPostProcessorExt;
+package com.slim.playground.configExt.BeanFactoryPostProcessorExt;
 
-import com.slim.playground.extConfig.NormalBean;
+import com.slim.playground.configExt.NormalBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;

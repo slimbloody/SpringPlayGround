@@ -1,4 +1,4 @@
-package com.slim.playground.extConfig;
+package com.slim.playground.configExt;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

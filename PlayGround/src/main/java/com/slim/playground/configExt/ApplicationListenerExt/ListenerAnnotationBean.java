@@ -1,4 +1,4 @@
-package com.slim.playground.extConfig.ApplicationListenerExt;
+package com.slim.playground.configExt.ApplicationListenerExt;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
