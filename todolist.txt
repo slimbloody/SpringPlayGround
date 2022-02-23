@@ -4,3 +4,5 @@
 4. bean三级缓存
 5. 动态代理
 6. mybatis 三级缓存
+7. shardingJdbc 怎么代理数据源的 知道是哪个库, 哪个表的, 去对应的库表查数据
+8. refreshScope 内部起了容器
