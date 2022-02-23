@@ -173,6 +173,14 @@ finishBeanFactoryInitialization(beanFactory);
   2. 初始化值解析器类型 的bean: EmbeddedValueResolver
   3. 初始化AspectJ Weaver 有关 的bean: EmbeddedValueResolver
   4. 初始化剩下的单实例bean(核心)
+	5. 初始化各类bean
+	// Initialize LoadTimeWeaverAware beans early to allow for registering their transformers early.
+		String[] weaverAwareNames = beanFactory.getBeanNamesForType(LoadTimeWeaverAware.class, false, false);
+		for (String weaverAwareName : weaverAwareNames) {
+			getBean(weaverAwareName);
+		}
+
+  6.
 	// Instantiate all remaining (non-lazy-init) singletons.
 	beanFactory.preInstantiateSingletons();
 	  1. 拿到所有的beanName, 依次进行初始化和创建对象
@@ -195,6 +203,10 @@ finishBeanFactoryInitialization(beanFactory);
 				// 核心!!! 创建单例bean
 				getBean(beanName);
 			}
+		4. 有没有实现 SmartInitializingSingleton 这个接口, 实现了就执行 SmartInitializingSingleton.afterSingletonsInstantiated
+12. 完成工厂的刷新工作
+// Last step: publish corresponding event.
+finishRefresh();
 -----------------------------------------------------------------
 
 org.springframework.beans.factory.support.AbstractBeanFactory#doGetBean
@@ -235,7 +247,20 @@ if (mbd.isSingleton()) {
 	bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
 }
 
+7. getSingleton 执行
+  1. 拿到bean对象
+				try {
+					singletonObject = singletonFactory.getObject();
+					newSingleton = true;
+				}
+	2. 把创建出来的bean添加到单实例bean缓存中 singletonObjects
+	ioc容器就是这些map, map里面保存了单实例bean, 环境信息
+				if (newSingleton) {
+					addSingleton(beanName, singletonObject);
+				}
+
 -----------------------------------------------------------------
+6. 启动单实例的创建流程 内部的  createBean
 调用createBean来创建bean: createBean(beanName, mbd, args)
 
 1. 拿到bean的信息, 解析bean的类型
