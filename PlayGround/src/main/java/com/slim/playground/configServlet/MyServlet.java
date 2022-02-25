@@ -1,4 +1,4 @@
-package com.slim.playground.controller.servletAnnotation;
+package com.slim.playground.configServlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 // @WebFilter
 
 // 拦截的路径
-@WebServlet("/hello")
+// @WebServlet("/myServlet")
 public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

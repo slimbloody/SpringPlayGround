@@ -17,4 +17,16 @@ public class ServletAnnotationController {
     @PostMapping("/beanFactoryPostProcessor")
     public void beanFactoryPostProcessor() {
     }
+
+    /*
+
+    // shared libraries(共享库) / runtimes pluggability(运行时插件能力)
+    1. servlet容器 在启动应用的时候会扫描秒每个jar包的 servletContainerInitializer,
+    绑定在 META-INF/services/javax.servlet.ServletContainerInitializer 下面
+    文件就会指向 servletContainerInitializer 的实现
+    启动并运行这个实现类的方法
+
+    2.
+
+     */
 }
