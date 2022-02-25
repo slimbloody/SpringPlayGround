@@ -207,6 +207,26 @@ finishBeanFactoryInitialization(beanFactory);
 12. 完成工厂的刷新工作
 // Last step: publish corresponding event.
 finishRefresh();
+    1. 处理和生命周期有关的后置处理器
+		// Initialize lifecycle processor for this context.
+		initLifecycleProcessor();
+		在beanFactory的 onRefresh onClose 处拦截
+
+		2. 刷新容器
+		// Propagate refresh to lifecycle processor first.
+		getLifecycleProcessor().onRefresh();
+
+    3. 发布容器刷新完成事件
+		// Publish the final event.
+		publishEvent(new ContextRefreshedEvent(this));
+
+		4. 注册mBean相关信息
+		// Participate in LiveBeansView MBean, if active.
+		LiveBeansView.registerApplicationContext(this);
+
+
+
+
 -----------------------------------------------------------------
 
 org.springframework.beans.factory.support.AbstractBeanFactory#doGetBean
@@ -354,3 +374,7 @@ exposedObject = initializeBean(beanName, exposedObject, mbd);
 
 
 
+总结
+什么时候创建bean
+1. 用到这个bean的时候, getBean方法
+2. 统一创建剩下的bean finishBeanFactoryInitialization
