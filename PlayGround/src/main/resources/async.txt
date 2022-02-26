@@ -1,0 +1,99 @@
+==================================
+AsyncServlet
+==================================
+在Servlet 3.0之前, Servlet采用Thread-Per-Request的方式处理请求。
+即每一次Http请求都由某个线程从头到尾负责处理。
+
+如果一个请求需要进行IO操作,比如访问数据库、调用第三方服务接口等,那么其所对应的线程将同步地等待I0操作完成,而IO操作是非常慢的,所以此时的线程并不能及时地释放回线程池以供后续使用,在并发最越来越大的情况下,这将带来严重的性能问题。即便是像Spring、Struts这样的高层框架也脱离不了这样的桎梏,因为他们都是建立在Servlet之上的。为了解决这样的问题, Servlet 3.0引入了异步处理，然后在Servlet 3.1中又引入了非阻塞I0来进一步增强异步处理的性能。
+
+
+tomcat -> 线程池 调用spring的模块, 返回结果
+
+servlet 3.0
+dispatching requests: 里面有一个AsyncContext
+An object implementing the AsyncContext interface may be obtained from the ServletRequest via one of star tAsync methods. Once you have an AsyncContext, you can use it to either complete the processing of the request via the complete() method or use one of the dispatch methods described below.
+
+
+    发送 request          AsyncContext
+web -----------> 主线程池 -------------> 异步处理线程池
+              普通请求立即返回
+
+==================================
+AsyncSpringMVC
+==================================
+A ServletRequest can be put in asynchronous mode by calling request.startAsync(). The main effect of doing so is that the Servlet, as well as any Filters, can exit but the response will remain open allowing some other thread to complete processing.
+
+The call to request.startAsync() returns an AsyncContext, which can be used for further control over async processing. For example it provides the method dispatch, which can be called from an application thread in order to "dispatch" the request back to the Servlet container. An async dispatch is similar to a forward except it is made from one (application) thread to another (Servlet container) thread whereas a forward occurs synchronously in the same (Servlet container) thread.
+
+ServletRequest provides access to the current DispatcherType, which can be used to distinguish if a Servlet or a Filter is processing on the initial request processing thread and when it is processing in an async dispatch.
+------------------------------------------
+With the above in mind, the following is the sequence of events for async request processing with a Callable
+------------------------------------------
+1) Controller returns a Callable
+2) Spring MVC starts async processing and submits the Callable to a TaskExecutor for processing in a separate thread
+3) the DispatcherServlet and all Filter's exit the request processing thread but the response remains open
+DispatcherServlet 和 所有的Filter 退出web容器的线程, 但是response保持打开状态
+4) the Callable produces a result and Spring MVC dispatches the request back to the Servlet container
+callable 返回结果, springMVC讲请求重新派发给容器, 恢复之前的处理
+5) the DispatcherServlet is invoked again and processing resumes with the asynchronously produced result from the Callable
+根据callable返回的结果, springMVC继续进行视图渲染流程等.(请求再次发给springMVC, 从收请求->视图渲染)
+
+The exact sequencing of (2), (3), and (4) may vary depending on the speed of execution of the concurrent threads.
+
+
+像有interceptor这种, 会出现这种情况
+preHandle
+主线程开始
+主线程结束
+========= DispatcherServlet 及所有的Filter 都退出线程 ============
+
+========= 等待callable执行完成 ============
+副线程开始
+副线程结束
+=========    callable执行完成 ============
+
+========= 又收到请求 ============
+preHandle
+postHandle (Callable返回值就是目标方法的返回值)
+afterCompletion
+
+拦截器其实不能真正拦截业务的处理, 对callable这段的处理没有影响的
+所以需要异步拦截器, 异步listener一类的
+
+==================================
+AsyncSpringMVC
+==================================
+
+              Application 1                                                  Application 2
+             +--------------+                +------------+                 +-------------+
+             |              |                |            |                 |             |
+             |  Tomcat      |                |            |                 |             |
+             | +----------+ |                |            |                 |             |
+ RequestStart| |          | |1.send Msg      |            |2.Listen to Res  |             |
+------------>| | Thread1  | +--------------->|            +---------------->|             |
+             | |          | |                |            |                 | processing  |
+             | +----------+ |                | Message    |                 |             |
+             |              |                | MiddleWare |                 |             |
+             | +----------+ |                |            |                 |             |
+             | |          | |                |            |                 |             |
+             | |          | |                |            |                 |             |
+             | |          | |                |            |                 |             |
+  RequestEnd | | Thread2  | |4.Listen to Res |            |3.process result |             |
+<------------+ |          | |<---------------+            |<----------------+             |
+             | +----------+ |                |            |                 |             |
+             |              |                |            |                 |             |
+             +--------------+                +------------+                 +-------------+
+
+比如创建订单, 应用1要一部分信息, 还需要应用2填充一部分信息.
+应用2, 监听到需要的消息后, 就填充信息, 返回处理结果到消息中间件
+应用1监听到返回结果后组装到应用1的响应里面
+
+DeferredResult
+可以设置xxx秒内必须完成, 如果完成不了就返回错误
+
+DeferredResult如果后面有一个节点挂了, DeferredResult的请求又不会抛弃掉, 如果请求多了很容易OOM吧
+
+
+
+
+
