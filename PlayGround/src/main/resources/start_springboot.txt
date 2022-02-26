@@ -48,3 +48,10 @@
 
 总结:
 以注解的方式启动springMVC就需要写一个类继承AbstractAnnotationConfigDispatcherServletInitializer, 实现抽象方法指定DispatcherServlet的配置信息
+
+这里分了父子容器
+web容器扫描 controllers, view resolvers, and other web-related beans(Controllers, viewResolver, handlerMapping)
+
+根容器扫描 middle-tier services, dataSources, etc(services, repositories) 数据源,事务控制等等
+
+

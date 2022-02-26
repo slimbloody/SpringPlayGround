@@ -1,0 +1,9 @@
+SpringMVC:
+1. 定制springMvc, @EnableWebMvc 开启SpringMVC定制配置功能
+2. 配置组件(视图解析器, 视图映射, 静态资源映射, 拦截器...)
+WebMvcConfigurerAdapter implements WebMvcConfigurer
+WebMvcConfigurerAdapter 里面都是空方法, 只要挑自己需要的方法override, 定制就行了, 不需要像接口一样要写所有的方法, 所以WebMvcConfigurerAdapter用的多
+后来用这个 WebMvcConfigurer interface, 因为java8开始interface有default方法了
+3.
+
+
