@@ -1,4 +1,4 @@
-9. springboot 的启动流程
+springboot 的启动流程
   1. web容器在启动的时候，会扫描每个jar包下的/META-INF/services/javax.servlet.ServletContainerInitializer
   2. 加载这个文件指定的类SpringServletContainerInitializer
   3. spring的应用一启动会加载感兴趣的WebApplicationInitializer接口的下的所有组件:
