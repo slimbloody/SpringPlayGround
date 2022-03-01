@@ -1,4 +1,4 @@
-package com.slim.PlayInAction;
+package com.slim.playInAction;
 
 
 import lombok.extern.slf4j.Slf4j;

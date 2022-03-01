@@ -92,7 +92,7 @@
         </executions>
         <configuration>
           <!-- 指定该Main Class为全局的唯一入口 -->
-          <mainClass>com.slim</mainClass>
+          <mainClass>com.slim.playInAction.PlayInActionApplication</mainClass>
         </configuration>
       </plugin>
       <plugin>
