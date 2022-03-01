@@ -1,0 +1,13 @@
+server:
+  port: 9761
+
+spring:
+  profiles:
+    active: test #pre, prod
+  main:
+    web-application-type: none
+
+
+mybatis-plus:
+  self-configuration:
+    enable-cal-execution-time: true

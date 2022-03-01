@@ -11,6 +11,7 @@
 
   <modules>
     <module>PlayGround</module>
+    <module>PlayInAction</module>
   </modules>
 
   <properties>
@@ -24,10 +25,17 @@
     <lombok.version>1.18.20</lombok.version>
     <javax.version>1</javax.version>
     <mysql-connector.version>8.0.28</mysql-connector.version>
+    <mybatis-plus-boot-starter.version>3.5.1</mybatis-plus-boot-starter.version>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatis-plus-boot-starter.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
