@@ -1,4 +1,4 @@
-package com.slim.playground.test;
+package com.slim.playground.test.basicJava.threadLocal;
 
 public class ThreadLocalContext {
     private static final ThreadLocal<ThreadLocalMsg> msg = new ThreadLocal<>();

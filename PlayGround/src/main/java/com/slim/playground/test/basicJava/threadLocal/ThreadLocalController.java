@@ -1,4 +1,4 @@
-package com.slim.playground.test;
+package com.slim.playground.test.basicJava.threadLocal;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.slim.playground.test;
+package com.slim.playground.test.basicJava.threadLocal;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
