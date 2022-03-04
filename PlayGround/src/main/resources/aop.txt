@@ -153,18 +153,25 @@ postProcessAfterInitialization
 做了什么活
 =============================================
 org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#postProcessBeforeInstantiation
+
+    org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator#isInfrastructureClass
     先关心一下MathCalculator和LogAspect的创建
     1. 判断当前bean是否在advisedBeans中, (保存了所有需要增强的bean)
 
-
 		(super.isInfrastructureClass(beanClass) ||
 		(this.aspectJAdvisorFactory != null && this.aspectJAdvisorFactory.isAspect(beanClass)))
-    2. 判断当前bean是否基础类型的
+    1. 判断当前bean是否基础类型的
         Advice.class.isAssignableFrom(beanClass) ||
 				Pointcut.class.isAssignableFrom(beanClass) ||
 				Advisor.class.isAssignableFrom(beanClass) ||
 				AopInfrastructureBean.class.isAssignableFrom(beanClass)
 				或者是否是切面
+		2. 看有没有标记切面的注解, Aspect
+		this.aspectJAdvisorFactory.isAspect(beanClass)
+		3. 看是否需要跳过
+	  protected boolean shouldSkip(Class<?> beanClass, String beanName) {
+	  	return AutoProxyUtils.isOriginalInstance(beanName, beanClass);
+	  }
 
 
 
