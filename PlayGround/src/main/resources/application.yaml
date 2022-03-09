@@ -10,3 +10,14 @@ spring:
 #config:
 #  test:
 #    beanValue1: 1
+
+logging:
+  path: playground.log
+  file:
+    max-size: 10MB
+  level:
+    root: info
+    com.slim.playground: warn
+  config: classpath:logback-config.xml
+
+

@@ -1,7 +1,12 @@
 package com.slim.playground.test.basicJava.threadLocal;
 
 public class BasicTypeContext {
-    private static final ThreadLocal<Boolean> threadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<Boolean> threadLocal = new ThreadLocal<Boolean>() {
+        @Override
+        protected Boolean initialValue() {
+            return Boolean.TRUE;
+        }
+    };
 
     public static Boolean get() {
         return threadLocal.get();

@@ -1,6 +1,8 @@
 package com.slim.playground.test.basicJava.threadLocal;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,7 @@ ThreadLocal应该算一个包装类, 因为每次都是找到currentThread, 然�
 public class ThreadLocalController {
     @PostMapping("/test")
     public void test() {
+        // Logger logger = LoggerFactory.getLogger(ThreadLocalController.class);
         try {
             ThreadLocalMsg msg = ThreadLocalMsg.builder().num(1).build();
             ThreadLocalContext.set(msg);
@@ -38,7 +41,7 @@ public class ThreadLocalController {
             Boolean value = BasicTypeContext.get();
             log.info("value: {}", value);
 
-            BasicTypeContext.set(true);
+            BasicTypeContext.set(false);
             value = BasicTypeContext.get();
             log.info("value: {}", value);
 

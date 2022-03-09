@@ -1,0 +1,33 @@
+Logback can report information about its internal state using a built-in status system. Important events occurring during logback's lifetime can be accessed through a component called StatusManager. For the time being, let us instruct logback to print its internal state by invoking the static print() method of the StatusPrinter class.
+
+we have instructed logback to print its internal state by invoking the StatusPrinter.print() method. Logback's internal status information can be very useful in diagnosing logback-related problems.
+
+
+
+Logger, Appenders and Layouts
+Logback is built upon three main classes: Logger, Appender and Layout. These three types of components work together to enable developers to log messages according to message type and level, and to control at runtime how these messages are formatted and where they are reported.
+
+
+
+Logger context
+The first and foremost advantage of any logging API over plain System.out.println resides in its ability to disable certain log statements while allowing others to print unhindered. This capability assumes that the logging space, that is, the space of all possible logging statements, is categorized according to some developer-chosen criteria. In logback-classic, this categorization is an inherent part of loggers. Every single logger is attached to a LoggerContext which is responsible for manufacturing loggers as well as arranging them in a tree like hierarchy.
+
+
+
+
+1. Level Inheritance
+不标注的话
+x.y.z < x.y < x < root
+
+2. 日志等级:
+TRACE < DEBUG < INFO <  WARN < ERROR.
+
+
+================================
+Chapter 13: Receivers
+================================
+By virtue of the fact that a receiver extends this class, a receiver participates in the Logback component LifeCycle and a receiver is ContextAware.
+
+
+
+
