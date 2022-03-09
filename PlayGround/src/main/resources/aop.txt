@@ -152,6 +152,7 @@ postProcessBeforeInstantiation
 postProcessAfterInitialization
 做了什么活
 =============================================
+1.
 org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#postProcessBeforeInstantiation
 
     org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator#isInfrastructureClass
@@ -169,11 +170,60 @@ org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#postProcess
 		2. 看有没有标记切面的注解, Aspect
 		this.aspectJAdvisorFactory.isAspect(beanClass)
 		3. 看是否需要跳过
-	  protected boolean shouldSkip(Class<?> beanClass, String beanName) {
-	  	return AutoProxyUtils.isOriginalInstance(beanName, beanClass);
-	  }
+		org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator.shouldSkip
+
+		@Override
+    protected boolean shouldSkip(Class<?> beanClass, String beanName) {
+   		// TODO: Consider optimization by caching the list of the aspect names
+   		// 获取自己定义的切面(PointCut)里面的通知方法
+   		// 每个封装的通知方法的增强器是InstantiationModelAwarePointcutAdvisor
+   		List<Advisor> candidateAdvisors = findCandidateAdvisors();
+   		for (Advisor advisor : candidateAdvisors) {
+   			if (advisor instanceof AspectJPointcutAdvisor &&
+   					((AspectJPointcutAdvisor) advisor).getAspectName().equals(beanName)) {
+   				return true;
+   			}
+   		}
+   		return super.shouldSkip(beanClass, beanName);
+   	}
+
+2. 创建这个bean
+
+3.
+org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization
+  org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.wrapIfNecessary(核心)
+
+
+		// Create proxy if we have advice.
+		1. 获取bean的通知方法以及增强器
+		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
+		if (specificInterceptors != DO_NOT_PROXY) {
+			this.advisedBeans.put(cacheKey, Boolean.TRUE);
+			Object proxy = createProxy(
+					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
+			this.proxyTypes.put(cacheKey, proxy.getClass());
+			return proxy;
+		}
+
+		this.advisedBeans.put(cacheKey, Boolean.FALSE);
+		return bean;
 
 
 
+
+
+
+1. 获取bean的通知方法以及增强器
+/**
+ * Find all candidate Advisors to use in auto-proxying.
+ * @return the List of candidate Advisors
+ */
+org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator#findCandidateAdvisors
+
+2. 找到能在当前bean使用的增强器(找哪些通知方法是需要切入当前bean方法的)
+org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator#findAdvisorsThatCanApply
+  1. 根据springEP选出能用的增强器
+  org.springframework.aop.support.AopUtils#canApply(org.springframework.aop.Advisor, java.lang.Class<?>, boolean)
+  2. 对增强器进行排序
 
 
