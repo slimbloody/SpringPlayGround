@@ -31,4 +31,25 @@ public class ThreadLocalController {
             ThreadLocalContext.remove();
         }
     }
+
+    @PostMapping("/basic")
+    public void basic() {
+        try {
+            Boolean value = BasicTypeContext.get();
+            log.info("value: {}", value);
+
+            BasicTypeContext.set(true);
+            value = BasicTypeContext.get();
+            log.info("value: {}", value);
+
+            value = BasicTypeContext.get();
+            log.info("value: {}", value);
+
+            BasicTypeContext.remove();
+            value = BasicTypeContext.get();
+            log.info("value: {}", value);
+        } finally {
+            ThreadLocalContext.remove();
+        }
+    }
 }
