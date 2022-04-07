@@ -12,6 +12,7 @@
   <modules>
     <module>PlayGround</module>
     <module>PlayInAction</module>
+    <module>basic</module>
   </modules>
 
   <properties>
